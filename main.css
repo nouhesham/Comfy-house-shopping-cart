@@ -18,11 +18,7 @@ body {
   background: var(--mainWhite);
   font-family: "Lato", sans-serif;
 }
-section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 .navbar {
   position: sticky;
   top: 0;
@@ -32,7 +28,6 @@ section {
   display: flex;
   align-items: center;
   z-index: 1;
-  justify-content: space-around;
 }
 .navbar-center {
   display: flex;
@@ -40,7 +35,7 @@ section {
   width: 100%;
   padding: 1.5em;
   align-items: center;
-  margin: 0;
+  margin: auto;
   max-width: 1200px;
 }
 
@@ -53,10 +48,48 @@ section {
 }
 .cart-items {
   position: absolute;
-  top: -8px;
-  right: -8px;
-  background: var(--primaryColor);
-  padding: 0 5px;
-  border-radius: 30%;
+  top: -15px;
+  right: -2px;
+  background-color: var(--primaryColor);
+  border-radius: 40%;
+  padding: 5px;
+  z-index: 1;
   color: var(--mainWhite);
+}
+.hero {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
+  background-image: url(/images/hero-bcg.jpeg);
+  width: 100%;
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.banner {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8);
+  justify-content: center;
+  background-size: 150px;
+  width: 600px;
+  height: 600px;
+  margin: 20rem;
+
+  display: inline-block;
+  padding: 2rem;
+}
+.banner-title {
+  font-size: 4rem;
+  text-transform: capitalize;
+}
+
+.banner-title {
+  font-size: 3.4rem;
+  text-transform: uppercase;
+  letter-spacing: var(--mainSpacing);
+  margin-bottom: 3rem;
 }
