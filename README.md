@@ -1,2 +1,5 @@
 # Comfy-house-shopping-cart
-This is a Javascript project . it is a shopping cart for furniture and rooms requirement including beds and sheets . you can add any item to the cart and increase the number of the products ,you can remove the items you dont want 
+<p> -This is a Javascript project</p> 
+<p> -It is a shopping cart for furniture and rooms requirements including beds and sheets</p>
+<p> -You can add any item to the cart and increase the number of the products</p>
+<p> -You can also remove the unneeded items</p>
