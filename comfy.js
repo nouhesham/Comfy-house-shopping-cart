@@ -15,4 +15,5 @@ let cart = [];
 cartbutton.addEventListener("click", function () {
   cartOverlay.classList.add("showcart");
   cartOverlay.classList.add("transparentBcg");
+  CartDom.style.transform = "translateX(0)";
 });
