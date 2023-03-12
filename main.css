@@ -35,7 +35,7 @@ body {
   width: 100%;
   padding: 1.5em;
   align-items: center;
-  margin: auto;
+  margin: 0 auto;
   max-width: 1200px;
 }
 
@@ -75,9 +75,9 @@ body {
   background: rgba(255, 255, 255, 0.8);
   justify-content: center;
   background-size: 150px;
-  width: 600px;
-  height: 600px;
+
   margin: 20rem;
+  transition: var(--mainTransition);
 
   display: inline-block;
   padding: 2rem;
@@ -93,3 +93,94 @@ body {
   letter-spacing: var(--mainSpacing);
   margin-bottom: 3rem;
 }
+.banner-btn {
+  background: #d2691e;
+  padding: 1rem 3rem;
+  border: 1.1 black solid;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+
+  text-transform: capitalize;
+}
+.banner-btn:hover {
+  background-color: transparent;
+  backdrop-filter: blur(8px);
+  transition: all 0.5s;
+}
+/* /*end of hero --------------------- */
+
+/* start of products----- */
+.products {
+  padding: 4em;
+}
+.section-title h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 5rem;
+  text-transform: capitalize;
+  letter-spacing: var(--mainSpacing);
+}
+.products-center {
+  display: grid;
+  max-width: 1170px;
+  margin: 0 auto;
+  display: grid;
+  /* when using this , it would be automatically responsive */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-column-gap: 1.5rem;
+  grid-row-gap: 2rem;
+}
+.img-container {
+  position: relative;
+  overflow: hidden;
+}
+.product-img {
+  width: 300px;
+  border-radius: 5px;
+}
+
+.bag-btn {
+  position: absolute;
+  top: 50%;
+  right: -2px;
+  padding: 0.3rem;
+  color: var(--mainWhite);
+  text-transform: capitalize;
+  font-weight: bold;
+  transition: var(--mainTransition);
+  transform: translate(100%);
+  border: 5px orange;
+  font-size: small;
+  background-color: var(--primaryColor);
+
+  cursor: pointer;
+}
+.bag-btn:hover {
+  background-color: orangered;
+}
+.img-container:hover .bag-btn {
+  transform: translate(0);
+}
+.img-container:hover .product-img {
+  opacity: 0.5;
+}
+.products-center .product .img-container .bag-btn i {
+  color: black;
+  padding: 0 0.3rem;
+}
+.products-center h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+}
+.products-center h4 {
+  color: var(--primaryColor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8em;
+}
+
+/* ---------------End of Products ---------------- */
+/* --------------- Cart ---------------- */
