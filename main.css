@@ -248,13 +248,14 @@ body {
   z-index: 3;
 }
 .cart-item h4 {
-  font-size: 0.85rem;
+  font-size: 0.6em;
   text-transform: capitalize;
   letter-spacing: var(--mainSpacing);
 }
 .cart-item h5 {
   margin: 0.5rem 0;
   letter-spacing: var(--mainSpacing);
+  font-size: 1em;
 }
 .item-amount {
   text-align: center;
@@ -262,6 +263,7 @@ body {
 .remove-item {
   color: grey;
   cursor: pointer;
+  font-size: 0.5em;
 }
 .fa-chevron-up,
 .fa-chevron-down {
@@ -278,4 +280,5 @@ body {
 .cart-footer h3 {
   text-transform: capitalize;
   margin-bottom: 1rem;
+  font-size: 1em;
 }
