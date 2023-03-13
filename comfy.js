@@ -19,12 +19,13 @@ const show = function () {
   cartOverlay.classList.add("transparentBcg");
   CartDom.style.transform = "translateX(0)";
 };
+console.log(iconclose);
 const close = function () {
   cartOverlay.classList.remove("showcart");
   cartOverlay.classList.remove("transparentBcg");
   CartDom.style.transform = "translateX(100%)";
-  console.log("hello");
 };
+iconclose.addEventListener("click", close);
 
 cartbutton.addEventListener("click", show);
 iconclose.addEventListener("click", function () {
@@ -34,10 +35,21 @@ iconclose.addEventListener("click", function () {
 document.addEventListener("keydown", function (e) {
   if (
     e.key === "Escape" &&
-    !cartOverlay.classList.contains("hidden") &&
-    !CartDom.classList.contains("translateX(100%)")
+    cartOverlay.classList.contains("visible") &&
+    CartDom.classList.contains("translateX(100%)")
   ) {
-    this.close();
+    close();
   }
 });
-console.log(iconclose);
+//getting the products
+
+class products {}
+
+//display products
+
+class UI {}
+
+//local storage
+
+class Storage {}
+document.addEventListener("DOMContentLoaded", () => {});
