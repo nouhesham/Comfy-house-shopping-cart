@@ -61,18 +61,43 @@ class Products {
     }
   }
 }
-console.log(products);
 
-//display products
+//display produccts
 
-class UI {}
+class UI {
+  displayProducts(products) {
+    let result = "";
+    products.forEach((product) => {
+      result += ` <article class="product">
+        <div class="img-container">
+          <img src=${product.image} alt="" class="product-img" />
+          <button class="bag-btn" data-id=${product.id}>
+            <i class="fas fa-cart-shopping"></i>Add to the bag
+          </button>
+        </div>
+        <h3>${product.title}</h3>
+        <h4>${product.price}</h4>
+      </article>`;
+    });
+    // console.log(result);
+  }
+
+  // Products.insertAdjacentHTML("")
+}
 
 //local storage
 
 class Storage {}
+
 document.addEventListener("DOMContentLoaded", () => {
   const ui = new UI();
-  const Product = new Products();
+  const products = new Products();
 
-  Product.getProducts().then((data) => console.log(data));
+  // get products
+  products
+    .getProducts()
+    .then((products) => console.log(ui.displayProducts(Products)));
+
+  let pro = products.getProducts().then((data) => console.log(data));
+  let prox = products.getProducts().then((product) => console.log(product));
 });
