@@ -55,6 +55,7 @@ class Products {
         const image = item.fields.image.fields.file.url;
         return { title, price, id, image };
       });
+      console.log(products);
       return products;
     } catch (error) {
       console.log(error);
@@ -76,10 +77,11 @@ class UI {
           </button>
         </div>
         <h3>${product.title}</h3>
-        <h4>${product.price}</h4>
+        <h4>${product.price}$</h4>
       </article>`;
     });
-    // console.log(result);
+    productsDom.innerHTML = result;
+    // productsDom.textContent = result;
   }
 
   // Products.insertAdjacentHTML("")
@@ -87,17 +89,21 @@ class UI {
 
 //local storage
 
-class Storage {}
+class Storage {
+  static saveproducts(products) {
+    localStorage.setItem("product", JSON.stringify(products));
+  }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const ui = new UI();
   const products = new Products();
 
   // get products
-  products
-    .getProducts()
-    .then((products) => console.log(ui.displayProducts(Products)));
-
-  let pro = products.getProducts().then((data) => console.log(data));
-  let prox = products.getProducts().then((product) => console.log(product));
+  products.getProducts().then((products) => {
+    ui.displayProducts(products);
+    Storage.saveproducts(products);
+  });
 });
+window.localStorage.setItem("product", "hello");
+console.log(window.localStorage);
