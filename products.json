@@ -3,7 +3,7 @@
     {
       "sys": { "id": "1" },
       "fields": {
-        "title": "queen panel bed",
+        "title": "Queen panel bed",
         "price": 10.99,
         "image": { "fields": { "file": { "url": "./images/product-1.jpeg" } } }
       }
@@ -11,7 +11,7 @@
     {
       "sys": { "id": "2" },
       "fields": {
-        "title": "king panel bed",
+        "title": "King panel bed",
         "price": 12.99,
         "image": { "fields": { "file": { "url": "./images/product-2.jpeg" } } }
       }
@@ -19,7 +19,7 @@
     {
       "sys": { "id": "3" },
       "fields": {
-        "title": "single panel bed",
+        "title": "Single panel bed",
         "price": 12.99,
         "image": { "fields": { "file": { "url": "./images/product-3.jpeg" } } }
       }
@@ -27,7 +27,7 @@
     {
       "sys": { "id": "4" },
       "fields": {
-        "title": "twin panel bed",
+        "title": "Twin panel bed",
         "price": 22.99,
         "image": { "fields": { "file": { "url": "./images/product-4.jpeg" } } }
       }
@@ -35,7 +35,7 @@
     {
       "sys": { "id": "5" },
       "fields": {
-        "title": "fridge",
+        "title": "Fridge",
         "price": 88.99,
         "image": { "fields": { "file": { "url": "./images/product-5.jpeg" } } }
       }
@@ -43,7 +43,7 @@
     {
       "sys": { "id": "6" },
       "fields": {
-        "title": "dresser",
+        "title": "Dresser",
         "price": 32.99,
         "image": { "fields": { "file": { "url": "./images/product-6.jpeg" } } }
       }
@@ -51,7 +51,7 @@
     {
       "sys": { "id": "7" },
       "fields": {
-        "title": "couch",
+        "title": "Couch",
         "price": 45.99,
         "image": { "fields": { "file": { "url": "./images/product-7.jpeg" } } }
       }
@@ -59,7 +59,7 @@
     {
       "sys": { "id": "8" },
       "fields": {
-        "title": "table",
+        "title": "Table",
         "price": 33.99,
         "image": { "fields": { "file": { "url": "./images/product-8.jpeg" } } }
       }
