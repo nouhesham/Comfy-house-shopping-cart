@@ -83,6 +83,13 @@ class UI {
     productsDom.innerHTML = result;
     // productsDom.textContent = result;
   }
+  getBagButtons() {
+    const btns = [...document.querySelectorAll(".bag-btn")];
+    btns.forEach((button) => {
+      let id = button.dataset.id;
+      console.log(id);
+    });
+  }
 
   // Products.insertAdjacentHTML("")
 }
@@ -100,10 +107,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const products = new Products();
 
   // get products
-  products.getProducts().then((products) => {
-    ui.displayProducts(products);
-    Storage.saveproducts(products);
-  });
+  products
+    .getProducts()
+    .then((products) => {
+      ui.displayProducts(products);
+      Storage.saveproducts(products);
+    })
+    .then(() => {
+      ui.getBagButtons();
+    });
 });
-window.localStorage.setItem("product", "hello");
-console.log(window.localStorage);
