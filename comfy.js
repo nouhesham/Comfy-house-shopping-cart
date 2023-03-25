@@ -13,6 +13,7 @@ const iconclose = document.querySelector("#icon");
 
 //cart items
 let cart = [];
+let buttonsDom = [];
 
 const show = function () {
   cartOverlay.classList.add("showcart");
@@ -83,12 +84,64 @@ class UI {
     productsDom.innerHTML = result;
     // productsDom.textContent = result;
   }
+
   getBagButtons() {
     const btns = [...document.querySelectorAll(".bag-btn")];
+    buttonsDom = btns;
     btns.forEach((button) => {
       let id = button.dataset.id;
       let incart = cart.find((item) => item.id === id);
+      if (incart) {
+        button.innerText = "IN CART";
+        button.disabled = true;
+      } else {
+        button.addEventListener("click", (event) => {
+          event.target.innerText = "In Cart";
+          event.target.disabled = true;
+
+          //get product from products
+          let cartItem = { ...Storage.getProducts(id), amount: 1 };
+
+          //add product to the cart
+          cart = [...cart, cartItem];
+          console.log(cart);
+          //save cart in local storgae
+          Storage.saveCart(cart);
+          //set cart values
+          this.setCartValues(cart);
+
+          //add cart item and display it
+          this.addCartItem(cartItem);
+
+          //show the cart
+        });
+      }
     });
+  }
+  setCartValues(cart) {
+    let tempTotal = 0;
+    let itemsTotal = 0;
+    cart.map((item) => {
+      tempTotal += item.price * item.amount;
+      itemsTotal += item.amount;
+    });
+    cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
+    cartItems.innerText = itemsTotal;
+  }
+  addCartItem(item) {
+    const div = document.createElement("div");
+    div.classList.add("cart-item");
+    div.innerHTML = `<img src=${item.Image} alt="">
+    <div>
+      <h4>${item.title}</h4>
+      <h5>${item.price}$</h5>
+      <span class="remove-item" data-id=${item.id}>remove</span>
+  </div>
+  <div>
+    <i class="fas fa-chevron-up" data-id=${item.id}></i>
+    <p class="item-amount">1</p>
+    <i class="fas fa-chevron-down" data-id=${item.id}></i>
+  </div>`;
   }
 
   // Products.insertAdjacentHTML("")
@@ -98,7 +151,14 @@ class UI {
 
 class Storage {
   static saveproducts(products) {
-    localStorage.setItem("product", JSON.stringify(products));
+    localStorage.setItem("products", JSON.stringify(products));
+  }
+  static getProducts(id) {
+    let products = JSON.parse(localStorage.getItem("products"));
+    return products.find((product) => product.id === id);
+  }
+  static saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
   }
 }
 
