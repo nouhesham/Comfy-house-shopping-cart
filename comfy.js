@@ -2,6 +2,7 @@
 const cartbutton = document.querySelector(".cart-btn");
 const closeCartbtn = document.querySelector(".close-cart");
 const clearCartbtn = document.querySelector(".clear-cart");
+console.log(clearCartbtn);
 const CartDom = document.querySelector(".cart");
 const cartOverlay = document.querySelector(".cart-overlay");
 const cartItems = document.querySelector(".cart-items");
@@ -9,29 +10,24 @@ const cartTotal = document.querySelector(".cart-total");
 const cartContent = document.querySelector(".cart-content");
 const productsDom = document.querySelector(".products-center");
 const showcart = document.querySelector(".showcart");
-const iconclose = document.querySelector("#icon");
 
 //cart items
 let cart = [];
 let buttonsDom = [];
 
-const show = function () {
-  cartOverlay.classList.add("showcart");
+const showCart = function () {
   cartOverlay.classList.add("transparentBcg");
-  CartDom.style.transform = "translateX(0)";
+  CartDom.classList.add("showcart");
 };
-console.log(iconclose);
+
 const close = function () {
   cartOverlay.classList.remove("showcart");
   cartOverlay.classList.remove("transparentBcg");
   CartDom.style.transform = "translateX(100%)";
 };
-iconclose.addEventListener("click", close);
+closeCartbtn.addEventListener("click", close);
 
-cartbutton.addEventListener("click", show);
-iconclose.addEventListener("click", function () {
-  console.log("hello");
-});
+cartbutton.addEventListener("click", showCart);
 
 document.addEventListener("keydown", function (e) {
   if (
@@ -74,7 +70,7 @@ class UI {
         <div class="img-container">
           <img src=${product.image} alt="" class="product-img" />
           <button class="bag-btn" data-id=${product.id}>
-            <i class="fas fa-cart-shopping"></i>Add to the bag
+            <i class="fas fa-cart-shopping"></i>Add to the cart
           </button>
         </div>
         <h3>${product.title}</h3>
@@ -94,28 +90,31 @@ class UI {
       if (incart) {
         button.innerText = "IN CART";
         button.disabled = true;
-      } else {
-        button.addEventListener("click", (event) => {
-          event.target.innerText = "In Cart";
-          event.target.disabled = true;
-
-          //get product from products
-          let cartItem = { ...Storage.getProducts(id), amount: 1 };
-
-          //add product to the cart
-          cart = [...cart, cartItem];
-          console.log(cart);
-          //save cart in local storgae
-          Storage.saveCart(cart);
-          //set cart values
-          this.setCartValues(cart);
-
-          //add cart item and display it
-          this.addCartItem(cartItem);
-
-          //show the cart
-        });
       }
+      button.addEventListener("click", (event) => {
+        event.target.innerText = "In Cart";
+        event.target.disabled = true;
+
+        //get product from products
+        let cartItem = { ...Storage.getProducts(id), amount: 1 };
+
+        //add product to the cart
+        cart = [...cart, cartItem];
+
+        //save cart in local storgae
+        Storage.saveCart(cart);
+        //set cart values
+        this.setCartValues(cart);
+
+        //add cart item and display it
+        this.addCartItem(cartItem);
+
+        this.showCart(cart);
+
+        this.cartLogic(cart);
+
+        //show the cart
+      });
     });
   }
   setCartValues(cart) {
@@ -128,10 +127,11 @@ class UI {
     cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
     cartItems.innerText = itemsTotal;
   }
+
   addCartItem(item) {
     const div = document.createElement("div");
     div.classList.add("cart-item");
-    div.innerHTML = `<img src=${item.Image} alt="">
+    div.innerHTML = `<img src=${item.image} alt="">
     <div>
       <h4>${item.title}</h4>
       <h5>${item.price}$</h5>
@@ -142,9 +142,52 @@ class UI {
     <p class="item-amount">1</p>
     <i class="fas fa-chevron-down" data-id=${item.id}></i>
   </div>`;
+    cartContent.appendChild(div);
+  }
+  showCart() {
+    cartOverlay.classList.add("transparentBcg");
+    CartDom.classList.add("showcart");
+  }
+  hidecart() {
+    cartOverlay.classList.remove("transparentBcg");
+    CartDom.classList.remove("showcart");
   }
 
-  // Products.insertAdjacentHTML("")
+  setupAPP() {
+    cart = Storage.getCart();
+    this.setCartValues(cart);
+    this.populate(cart);
+  }
+  populate(cart) {
+    cart.forEach((item) => this.addCartItem(item));
+  }
+  cartLogic() {
+    //clear cart items
+    clearCartbtn.addEventListener("click", () => this.clearCart());
+  }
+  //cart functionality
+
+  clearCart() {
+    let cartItems = cart.map((item) => item.id);
+
+    // console.log(cartItems);
+    cartItems.forEach((id) => this.removeItem(id));
+    while (cartContent.children.length > 0) {
+      cartContent.removeChild(cartContent.children[0]);
+    }
+    this.hidecart();
+  }
+  removeItem(id) {
+    cart = cart.filter((item) => item.id !== id);
+    this.setCartValues(cart);
+    Storage.saveCart(cart);
+    let button = this.getSingleButton(id);
+    button.disabled = false;
+    button.innerHTML = `<i class='fas fa-shopping-cart'></i>add to cart`;
+  }
+  getSingleButton(id) {
+    return buttonsDom.find((button) => button.dataset.id === id);
+  }
 }
 
 //local storage
@@ -160,11 +203,18 @@ class Storage {
   static saveCart() {
     localStorage.setItem("cart", JSON.stringify(cart));
   }
+  static getCart() {
+    return localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart"))
+      : [];
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   const ui = new UI();
   const products = new Products();
+  //set up application
+  ui.setupAPP();
 
   // get products
   products
@@ -175,5 +225,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then(() => {
       ui.getBagButtons();
+      ui.cartLogic();
     });
 });
