@@ -112,7 +112,7 @@ class UI {
 
         this.showCart(cart);
 
-        this.cartLogic(cart);
+        // this.cartLogic(cart);
 
         //show the cart
       });
@@ -174,6 +174,7 @@ class UI {
       if (event.target.classList.contains("remove-item")) {
         let removeItem = event.target;
         let id = removeItem.dataset.id;
+        //to remove it from the dom , we have to remove the parent
         cartContent.removeChild(removeItem.parentElement.parentElement);
         this.removeItem(id);
       } else if (event.target.classList.contains("fa-chevron-up")) {
@@ -182,10 +183,11 @@ class UI {
         let id = addAmount.dataset.id;
 
         let tempItem = cart.find((item) => item.id === id);
-        console.log(tempItem.amount);
-        tempItem.amount++;
+        tempItem.amount = tempItem.amount + 1;
+        // console.log({ addAmount, id, tempItem });
         Storage.saveCart(cart);
         this.setCartValues(cart);
+
         addAmount.nextElementSibling.innerText = tempItem.amount;
       } else if (event.target.classList.contains("fa-chevron-down")) {
         let lowerAmount = event.target;
@@ -193,7 +195,7 @@ class UI {
         let id = lowerAmount.dataset.id;
 
         let tempItem = cart.find((item) => item.id === id);
-        tempItem.amount--;
+        tempItem.amount = tempItem.amount - 1;
 
         if (tempItem.amount > 0) {
           Storage.saveCart(cart);

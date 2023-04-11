@@ -64,5 +64,34 @@
         "image": { "fields": { "file": { "url": "./images/product-8.jpeg" } } }
       }
     }
+    {
+      "sys": { "id": "9" },
+      "fields": {
+        "title": "Table",
+        "price": 33.99,
+        "image": { "fields": { "file": { "url": "./images/" } } }
+      }
+    }  {
+      "sys": { "id": "8" },
+      "fields": {
+        "title": "Table",
+        "price": 33.99,
+        "image": { "fields": { "file": { "url": "./images/product-8.jpeg" } } }
+      }
+    }  {
+      "sys": { "id": "8" },
+      "fields": {
+        "title": "Table",
+        "price": 33.99,
+        "image": { "fields": { "file": { "url": "./images/product-8.jpeg" } } }
+      }
+    }  {
+      "sys": { "id": "8" },
+      "fields": {
+        "title": "Table",
+        "price": 33.99,
+        "image": { "fields": { "file": { "url": "./images/product-8.jpeg" } } }
+      }
+    }
   ]
 }
