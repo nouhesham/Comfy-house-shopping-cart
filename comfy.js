@@ -1,4 +1,9 @@
 "strict";
+
+const client = contentful.createClient({
+  space: "bit2bwdk06f5",
+  accessToken: "kxSstXePM9L0tS_DkTqqLdGlZiXyAue4Wa0w-l_XD20",
+});
 const cartbutton = document.querySelector(".cart-btn");
 const closeCartbtn = document.querySelector(".close-cart");
 const clearCartbtn = document.querySelector(".clear-cart");
@@ -44,20 +49,27 @@ document.addEventListener("keydown", function (e) {
 class Products {
   async getProducts() {
     try {
+      let contentFul = await client.getEntries({
+        content_type: "comfyHouse",
+      });
+
       let result = await fetch("products.json");
       let data = await result.json();
-      let products = data.items;
+      // let products = data.items;
+
+      let products = [...contentFul.items, ...data.items];
       products = products.map((item) => {
         const { title, price } = item.fields;
         const { id } = item.sys;
         const image = item.fields.image.fields.file.url;
         return { title, price, id, image };
       });
-      console.log(products);
+
       return products;
     } catch (error) {
-      console.log(error);
+      // merge between the products in the json file and the ones in the contentful
     }
+    console.log(error);
   }
 }
 
@@ -141,7 +153,7 @@ class UI {
   </div>
   <div>
     <i class="fas fa-chevron-up" data-id=${item.id}></i>
-    <p class="item-amount">1</p>
+    <p class="item-amount">${item.amount}</p>
     <i class="fas fa-chevron-down" data-id=${item.id}></i>
   </div>`;
     cartContent.appendChild(div);
@@ -164,6 +176,7 @@ class UI {
   populate(cart) {
     cart.forEach((item) => this.addCartItem(item));
   }
+
   cartLogic() {
     //clear cart items
     clearCartbtn.addEventListener("click", () => {
