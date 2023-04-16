@@ -133,6 +133,7 @@ body {
 .img-container {
   position: relative;
   overflow: hidden;
+  max-height: 204px;
 }
 .product-img {
   width: 300px;
