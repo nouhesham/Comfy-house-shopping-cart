@@ -1,13 +1,9 @@
 "strict";
 
-const client = contentful.createClient({
-  space: "bit2bwdk06f5",
-  accessToken: "kxSstXePM9L0tS_DkTqqLdGlZiXyAue4Wa0w-l_XD20",
-});
 const cartbutton = document.querySelector(".cart-btn");
 const closeCartbtn = document.querySelector(".close-cart");
 const clearCartbtn = document.querySelector(".clear-cart");
-console.log(clearCartbtn);
+
 const CartDom = document.querySelector(".cart");
 const cartOverlay = document.querySelector(".cart-overlay");
 const cartItems = document.querySelector(".cart-items");
@@ -49,15 +45,11 @@ document.addEventListener("keydown", function (e) {
 class Products {
   async getProducts() {
     try {
-      let contentFul = await client.getEntries({
-        content_type: "comfyHouse",
-      });
-
       let result = await fetch("products.json");
       let data = await result.json();
       // let products = data.items;
 
-      let products = [...contentFul.items, ...data.items];
+      let products = [...data.items];
       products = products.map((item) => {
         const { title, price } = item.fields;
         const { id } = item.sys;
